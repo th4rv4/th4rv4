@@ -1,8 +1,8 @@
 <h1 align="center">Hey, I'm Atharva! 👋</h1>
 
 <p align="center">
-  🧠 19 y/o tech enthusiast & Android developer from Delhi, India 🇮🇳 <br>
-  📱 Ex-ROM Maintainer | Passionate about open-source | Fitness-focused like <a href="https://www.instagram.com/davidlaid/">David Laid</a>
+  🧠 20 y/o tech enthusiast & Android developer from Delhi, India 🇮🇳 <br>
+  📱 Unofficial AOSP Maintainer | Passionate about open-source | Chasing <a href="https://www.instagram.com/davidlaid/">David Laid's</a> physique.
 </p>
 
 ---
@@ -20,14 +20,14 @@ I've worked on a variety of devices and projects in the custom ROM scene:
 Currently experimenting with:
 - **Poco X6 Pro (Duchamp)** — breaking and fixing stuff — the usual dev routine.
 
-🔗 [Duchamp Device Tree](https://github.com/Atharva-Agnihotri7115/device_xiaomi_duchamp)
+🔗 [Duchamp Device Tree](https://github.com/Atharva-Agnihotri7115/android_device_xiaomi_duchamp)
 
 ---
 
 ## 🧰 Tech Stack & Skills
 
 - 🛠️ Android (ROM Development, Device Trees, Init, SELinux)
-- 🐧 Arch Linux & Gnome (daily drivers)
+- 🐧 Linux & Gnome (daily drivers)
 - 🔀 Git & GitHub workflows
 
 ---
@@ -36,23 +36,24 @@ Currently experimenting with:
 
 Outside tech, I vibe with:
 - ⚽ Football  
-- 🏋️‍♂️ Gym (Building like David Laid)  
+- 🏋️‍♂️ Gym 
 - 🎧 Music  
 - 🤸‍♂️ Martial arts & tricking
+- 🏕️ Trekking & Going on Hikes
 
 ---
 
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Atharva-Agnihotri7115&show_icons=true&theme=tokyonight" height="180"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Atharva-Agnihotri7115&layout=compact&theme=tokyonight" height="180"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=th4rv4&show_icons=true&theme=tokyonight" height="180"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=th4rv4&layout=compact&theme=tokyonight" height="180"/>
 </p>
 
 ### 🔥 Streak Heatmap
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Atharva-Agnihotri7115&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
+  <img src="https://streak-stats.demolab.com?user=th4rv4&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
 </p>
 
 ---
@@ -60,7 +61,7 @@ Outside tech, I vibe with:
 ## 🏆 Contribution Highlights
 
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Atharva-Agnihotri7115&theme=tokyonight&column=4&margin-w=15&margin-h=15" />
+  <img src="https://github-profile-trophy.vercel.app/?username=th4rv4&theme=tokyonight&column=4&margin-w=15&margin-h=15" />
 </p>
 
 ---
