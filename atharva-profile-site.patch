@@ -1,0 +1,346 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+new file mode 100644
+index 0000000..284dfee
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,34 @@
++name: Deploy portfolio to GitHub Pages
++
++on:
++  push:
++    branches: ["main"]
++  workflow_dispatch:
++
++permissions:
++  contents: read
++  pages: write
++  id-token: write
++
++concurrency:
++  group: "pages"
++  cancel-in-progress: true
++
++jobs:
++  deploy:
++    environment:
++      name: github-pages
++      url: ${{ steps.deployment.outputs.page_url }}
++    runs-on: ubuntu-latest
++    steps:
++      - name: Checkout
++        uses: actions/checkout@v4
++      - name: Configure Pages
++        uses: actions/configure-pages@v5
++      - name: Upload site artifact
++        uses: actions/upload-pages-artifact@v3
++        with:
++          path: .
++      - name: Deploy to GitHub Pages
++        id: deployment
++        uses: actions/deploy-pages@v4
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..c1bb879
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,300 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++<meta charset="UTF-8">
++<meta name="viewport" content="width=device-width, initial-scale=1.0">
++<meta name="theme-color" content="#111315">
++<meta name="description" content="Atharva Agnihotri — Android development, open source, motorcycles, photography and the process of building better things.">
++<meta property="og:title" content="ATHARVA — Built Different">
++<meta property="og:description" content="Android tinkerer, open-source builder, rider. Always a work in progress.">
++<meta property="og:type" content="website">
++<title>ATHARVA — Built Different</title>
++<style>
++:root {
++  --site-primary: #E9ECEB;
++  --site-on-primary: #111315;
++  --site-secondary: #B9C7C7;
++  --site-on-secondary: #101719;
++  --site-background: #111315;
++  --site-on-background: #F0F2EF;
++  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
++  --site-font-heading: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
++  --site-heading-scale: 1;
++  --site-spacing-scale: 1;
++  --site-radius-scale: 1;
++  --site-decoration-opacity: 1;
++  --surface: #1A1E20;
++  --surface-raised: #22282A;
++  --muted: #9AA5A4;
++  --line: rgba(232,239,236,.13);
++  --accent: #C9E4DF;
++  --signal: #D5FF72;
++}
++* { box-sizing: border-box; }
++html { scroll-behavior: smooth; }
++body { margin: 0; background: var(--site-background); color: var(--site-on-background); font-family: var(--site-font-body); }
++#app { min-height: 100vh; width: 100%; border-radius: 0; overflow: hidden; background-color: light-dark(var(--site-background), var(--site-background)); color: var(--site-on-background); position: relative; }
++.site-shell { max-width: 1240px; margin: 0 auto; padding: 0 calc(34px * var(--site-spacing-scale)); }
++.grain { pointer-events:none; position:absolute; inset:0; opacity:calc(.08 * var(--site-decoration-opacity)); z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E"); }
++header { position:relative; z-index:2; border-bottom:1px solid var(--line); }
++.nav { height:76px; display:flex; align-items:center; justify-content:space-between; }
++.brand { display:flex; align-items:center; gap:12px; letter-spacing:.16em; font-size:12px; font-weight:800; }
++.brand-mark { width:28px; height:28px; display:grid; place-items:center; color:var(--site-on-primary); background:var(--site-primary); border-radius:50%; font-size:13px; font-weight:900; }
++.nav-links { display:flex; gap:30px; align-items:center; }
++a { color:inherit; text-decoration:none; }
++.nav-links a,.nav-status { font-size:10px; text-transform:uppercase; letter-spacing:.16em; color:var(--muted); }
++.nav-links a:hover { color:var(--site-primary); }
++.nav-status { display:flex; align-items:center; gap:8px; }
++.dot { width:7px; height:7px; border-radius:50%; background:var(--signal); box-shadow:0 0 12px var(--signal); }
++.hero { position:relative; z-index:1; min-height:660px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:28px; padding-top:54px; padding-bottom:72px; }
++.eyebrow { color:var(--accent); font-size:10px; letter-spacing:.24em; text-transform:uppercase; font-weight:700; display:flex; align-items:center; gap:12px; }
++.eyebrow:before { content:""; height:1px; width:34px; background:var(--accent); }
++h1 { font-family:var(--site-font-heading); font-size:clamp(76px, 11.2vw, 150px); line-height:.79; letter-spacing:-.055em; text-transform:uppercase; margin:28px 0 24px; font-weight:900; }
++h1 span { display:block; color:transparent; -webkit-text-stroke:1px rgba(240,242,239,.7); }
++.hero-copy { max-width:470px; color:#B5BFBC; font-size:14px; line-height:1.8; }
++.hero-copy strong { color:var(--site-primary); font-weight:650; }
++.hero-actions { display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
++.btn { display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:15px 19px; border:1px solid var(--line); border-radius:calc(3px * var(--site-radius-scale)); text-transform:uppercase; letter-spacing:.14em; font-size:10px; font-weight:800; transition:.2s ease; cursor:pointer; }
++.btn-primary { background:var(--site-primary); color:var(--site-on-primary); border-color:var(--site-primary); }
++.btn-primary:hover { background:var(--accent); transform:translateY(-2px); }
++.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
++.hero-art { min-height:440px; position:relative; display:grid; place-items:center; }
++.orbit { position:absolute; width:min(38vw,430px); aspect-ratio:1; border:1px solid rgba(201,228,223,.22); border-radius:50%; transform:rotate(-24deg) scaleY(.55); }
++.orbit:before,.orbit:after { content:""; position:absolute; inset:13%; border:1px solid rgba(201,228,223,.15); border-radius:50%; }
++.orbit:after { inset:27%; }
++.machine-card { width:min(100%,420px); aspect-ratio: .92; position:relative; border:1px solid rgba(230,240,236,.18); border-radius:calc(8px * var(--site-radius-scale)); overflow:hidden; background:linear-gradient(145deg,#313A3B 0%,#171C1E 50%,#0E1112 100%); box-shadow:0 35px 90px rgba(0,0,0,.42); }
++.machine-card:before { content:""; position:absolute; inset:0; opacity:var(--site-decoration-opacity); background:radial-gradient(ellipse at 48% 38%,rgba(218,239,233,.2),transparent 48%),linear-gradient(135deg,transparent 45%,rgba(255,255,255,.05)); }
++.machine-label { position:absolute; top:22px; left:22px; font-size:9px; letter-spacing:.2em; color:#CAD6D2; text-transform:uppercase; }
++.machine-number { position:absolute; top:18px; right:22px; font-family:var(--site-font-heading); font-size:42px; color:rgba(240,245,241,.18); }
++.bike-silhouette { position:absolute; width:100%; height:66%; left:0; top:18%; filter:drop-shadow(0 20px 15px rgba(0,0,0,.65)); }
++.machine-bottom { position:absolute; left:22px; right:22px; bottom:20px; display:flex; justify-content:space-between; align-items:end; }
++.machine-bottom strong { display:block; font-family:var(--site-font-heading); font-size:29px; letter-spacing:.02em; }
++.machine-bottom small { color:#AAB7B2; font-size:9px; letter-spacing:.17em; text-transform:uppercase; }
++.side-stamp { position:absolute; right:-5px; bottom:18px; writing-mode:vertical-rl; color:var(--muted); font-size:9px; letter-spacing:.22em; }
++.ticker { position:relative; z-index:1; overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--surface); }
++.ticker-track { display:flex; gap:34px; white-space:nowrap; padding:17px 0; color:#B7C5C0; font-family:var(--site-font-heading); letter-spacing:.18em; font-size:13px; text-transform:uppercase; }
++.ticker-track span { display:flex; align-items:center; gap:34px; }
++.ticker-track b { color:var(--signal); font-size:10px; }
++.section { position:relative; z-index:1; padding:100px 0; }
++.section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:36px; }
++.kicker { color:var(--accent); font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
++h2 { font-family:var(--site-font-heading); text-transform:uppercase; font-size:clamp(42px,6vw,72px); line-height:.9; margin:12px 0 0; letter-spacing:-.035em; }
++.section-note { max-width:280px; color:var(--muted); font-size:12px; line-height:1.7; }
++.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
++.tile { min-height:255px; padding:25px; border:1px solid var(--line); background:linear-gradient(145deg,var(--surface-raised),var(--surface)); border-radius:calc(5px * var(--site-radius-scale)); position:relative; overflow:hidden; transition:.25s; }
++.tile:hover { transform:translateY(-5px); border-color:rgba(201,228,223,.45); }
++.tile-num { color:var(--muted); font-size:10px; letter-spacing:.18em; }
++.tile-icon { margin:30px 0 18px; width:38px; height:38px; display:grid; place-items:center; border:1px solid rgba(201,228,223,.35); color:var(--accent); font-size:18px; }
++.tile h3 { font-family:var(--site-font-heading); font-size:27px; letter-spacing:.02em; text-transform:uppercase; margin:0 0 10px; }
++.tile p { color:var(--muted); font-size:12px; line-height:1.7; max-width:300px; margin:0; }
++.tile-mark { position:absolute; right:18px; bottom:-28px; font-family:var(--site-font-heading); font-size:130px; line-height:1; color:rgba(230,240,236,.035); }
++.manifesto { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:75px 0; }
++.manifesto h2 { font-size:clamp(45px,6vw,78px); }
++.manifesto-copy { font-size:clamp(20px,2.5vw,29px); line-height:1.45; color:#C4CECA; max-width:670px; }
++.manifesto-copy em { color:var(--site-primary); font-style:normal; }
++.manifesto-copy .dim { color:#697471; }
++.specs { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); margin-top:32px; }
++.spec { padding:22px; border-right:1px solid var(--line); }
++.spec:last-child { border:0; }
++.spec strong { display:block; font-family:var(--site-font-heading); font-size:34px; color:var(--site-primary); }
++.spec span { color:var(--muted); text-transform:uppercase; font-size:9px; letter-spacing:.15em; }
++.terminal { background:#090C0D; border:1px solid rgba(201,228,223,.2); border-radius:calc(6px * var(--site-radius-scale)); overflow:hidden; box-shadow:0 22px 60px rgba(0,0,0,.22); }
++.terminal-top { height:43px; display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid rgba(255,255,255,.08); color:#8B9994; font-size:9px; letter-spacing:.16em; text-transform:uppercase; }
++.terminal-dots { display:flex; gap:6px; }
++.terminal-dots i { width:7px; height:7px; border-radius:50%; background:#60706B; }
++.terminal-body { padding:24px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; line-height:2; color:#B9C8C1; }
++.terminal-body .prompt { color:var(--signal); }
++.terminal-body .comment { color:#6D8179; }
++.terminal-body .value { color:#E8F1EC; }
++.terminal-body .cursor { display:inline-block; width:7px; height:14px; background:var(--signal); vertical-align:middle; animation:blink 1s steps(2,start) infinite; }
++@keyframes blink { to { visibility:hidden; } }
++.terminal-controls { display:flex; justify-content:space-between; align-items:center; padding:0 24px 22px; gap:12px; }
++.terminal-controls small { color:#75847E; font-size:9px; letter-spacing:.15em; text-transform:uppercase; }
++#run-command { background:transparent; border:1px solid rgba(201,228,223,.3); color:var(--accent); padding:10px 13px; font:inherit; font-size:9px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
++#run-command:hover { background:rgba(201,228,223,.1); }
++footer { position:relative; z-index:1; border-top:1px solid var(--line); padding:28px 0 38px; }
++.footer-row { display:flex; justify-content:space-between; gap:20px; align-items:center; }
++.footer-row p { color:var(--muted); font-size:10px; letter-spacing:.1em; }
++.footer-row strong { font-family:var(--site-font-heading); letter-spacing:.12em; font-size:19px; }
++
++.project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
++.project-card { min-height:260px; display:flex; flex-direction:column; padding:24px; border:1px solid var(--line); background:linear-gradient(145deg,var(--surface-raised),var(--surface)); border-radius:calc(5px * var(--site-radius-scale)); transition:.25s ease; position:relative; overflow:hidden; }
++.project-card:hover { transform:translateY(-5px); border-color:rgba(201,228,223,.5); }
++.project-featured { background:linear-gradient(145deg,#34413f,#1a2021 70%); }
++.project-github { background:linear-gradient(145deg,#dce6e1,#aebdb7); color:#111819; }
++.project-github p,.project-github .project-top { color:#40504b; }
++.project-top { display:flex; justify-content:space-between; color:var(--muted); font-size:9px; letter-spacing:.16em; }
++.project-card h3 { margin:35px 0 12px; font-family:var(--site-font-heading); font-size:clamp(28px,3vw,40px); line-height:.94; text-transform:uppercase; letter-spacing:-.02em; }
++.project-card p { margin:0 0 25px; color:var(--muted); font-size:12px; line-height:1.7; max-width:310px; }
++.project-link { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:15px; border-top:1px solid var(--line); color:var(--accent); font-size:9px; letter-spacing:.16em; font-weight:800; }
++.project-github .project-link { color:#14201d; border-color:rgba(20,32,29,.2); }
++.contact-panel { display:grid; grid-template-columns:1fr 1fr; gap:50px; padding:55px; border:1px solid var(--line); background:linear-gradient(135deg,var(--surface-raised),var(--surface)); }
++.contact-panel h2 { margin-top:15px; }
++.contact-panel p { max-width:370px; color:var(--muted); font-size:13px; line-height:1.8; margin-top:22px; }
++.contact-links { display:flex; flex-direction:column; justify-content:center; }
++.contact-links a { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:19px 0; border-bottom:1px solid var(--line); }
++.contact-links a:first-child { border-top:1px solid var(--line); }
++.contact-links span { color:var(--muted); font-size:9px; letter-spacing:.17em; }
++.contact-links strong { font-size:13px; letter-spacing:.03em; }
++.contact-links a:hover strong { color:var(--accent); }
++@media(max-width:800px) { .project-grid{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr;padding:35px} }
++@media(max-width:520px) { .project-grid{grid-template-columns:1fr}.project-card{min-height:230px}.contact-panel{padding:25px} }
++
++@media(max-width:800px) { .site-shell{padding-left:22px;padding-right:22px}.hero{grid-template-columns:1fr;min-height:0;padding-top:65px}.hero-art{min-height:420px}.machine-card{width:min(88%,420px)}.orbit{width:min(78vw,420px)}.grid{grid-template-columns:1fr 1fr}.manifesto{grid-template-columns:1fr;gap:28px}.section{padding:75px 0}.specs{grid-template-columns:1fr 1fr}.spec:nth-child(2){border-right:0}.spec:nth-child(-n+2){border-bottom:1px solid var(--line)}.nav-links{gap:14px}.nav-links a{font-size:9px} }
++@media(max-width:520px) { .nav{height:65px}.nav-links{display:none}.nav-status{font-size:9px}.hero{padding-bottom:50px}h1{font-size:clamp(76px,20vw,110px)}.hero-art{min-height:350px}.machine-card{width:92%}.grid{grid-template-columns:1fr}.tile{min-height:220px}.section-head{display:block}.section-note{margin-top:18px}.spec{padding:17px}.spec strong{font-size:29px}.terminal-body{font-size:10px;padding:17px}.footer-row{align-items:flex-start;flex-direction:column;gap:8px} }
++@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
++</style>
++</head>
++<body>
++<div id="app">
++  <div class="grain" aria-hidden="true"></div>
++  <header>
++    <div class="site-shell nav">
++      <a class="brand" href="#top" aria-label="Atharva home"><span class="brand-mark">A.</span><span>ATHARVA / 001</span></a>
++      <nav class="nav-links" aria-label="Main navigation"><a href="#identity">Identity</a><a href="#projects">Projects</a><a href="#build">Build log</a><a href="#contact">Contact</a></nav>
++      <div class="nav-status"><span class="dot"></span> IN PROGRESS · ALWAYS</div>
++    </div>
++  </header>
++  <main id="top">
++    <section class="site-shell hero">
++      <div>
++        <div class="eyebrow">Independent mind · Himachal / India</div>
++        <h1>Built<br><span>different.</span></h1>
++        <p class="hero-copy">A little bit of <strong>mountain air</strong>, a lot of late-night debugging, and the kind of discipline that keeps showing up. Not finished. Not standing still. Just getting sharper with every iteration.</p>
++        <div class="hero-actions"><a class="btn btn-primary" href="#identity">Explore the build <span>↗</span></a><a class="btn btn-ghost" href="#terminal">Enter terminal <span>⌘</span></a></div>
++      </div>
++      <div class="hero-art" aria-label="Abstract pearl-white sport motorcycle inspired visual">
++        <div class="orbit"></div>
++        <div class="machine-card">
++          <div class="machine-label">Garage / personal archive</div><div class="machine-number">250</div>
++          <svg class="bike-silhouette" viewBox="0 0 520 330" role="img" aria-label="Stylized pearl white sport motorcycle illustration">
++            <defs><linearGradient id="pearl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".42" stop-color="#dce5e2"/><stop offset="1" stop-color="#7e9290"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#65716f"/><stop offset="1" stop-color="#141a1b"/></linearGradient></defs>
++            <ellipse cx="260" cy="284" rx="190" ry="15" fill="#050708" opacity=".65"/>
++            <g fill="none" stroke="#111718" stroke-width="10"><circle cx="130" cy="245" r="59"/><circle cx="396" cy="245" r="59"/></g>
++            <g fill="none" stroke="#788985" stroke-width="3"><circle cx="130" cy="245" r="47"/><circle cx="396" cy="245" r="47"/><path d="M130 245L205 177L277 245L396 245L330 150L205 177L130 245M277 245L330 150"/></g>
++            <path d="M184 176Q206 122 282 119L348 145L318 174L245 190L204 202Z" fill="url(#pearl)" stroke="#f5fbf8" stroke-width="2"/>
++            <path d="M274 119Q308 92 356 119L389 153L347 161L318 145Z" fill="url(#pearl)" stroke="#f5fbf8" stroke-width="2"/>
++            <path d="M352 118L386 128L409 151L379 151Z" fill="#a8c1bc" opacity=".9"/>
++            <path d="M183 177L145 211L204 207L245 190L277 245L305 244L285 180L245 160Z" fill="url(#metal)"/>
++            <path d="M245 190L278 245L335 245L315 190L285 180Z" fill="#202a2b" stroke="#81918c" stroke-width="2"/>
++            <path d="M206 170Q235 145 280 145L314 164L276 177L231 185Z" fill="#11191a"/>
++            <path d="M195 154L237 130L272 133L249 151Z" fill="#0c1213"/>
++            <path d="M366 144L414 157L398 170L356 159Z" fill="#dfe9e5"/>
++            <path d="M105 188L149 185L170 196L143 204Z" fill="#9fb6b0"/>
++            <path d="M122 183L83 170L67 174" fill="none" stroke="#879894" stroke-width="5" stroke-linecap="round"/>
++            <path d="M357 113L390 102L409 107" fill="none" stroke="#879894" stroke-width="5" stroke-linecap="round"/>
++            <path d="M186 178L225 185" stroke="#e9f2ee" stroke-width="3"/>
++            <path d="M300 201L335 213" stroke="#d6e2de" stroke-width="2" opacity=".6"/>
++          </svg>
++          <div class="machine-bottom"><div><small>Daily machine / forever learning</small><strong>LUNA // SF250</strong></div><small>PEARL WHITE</small></div>
++        </div>
++        <div class="side-stamp">RIDE / BUILD / REPEAT — EST. 2005</div>
++      </div>
++    </section>
++    <div class="ticker"><div class="site-shell ticker-track"><span>Curiosity <b>✳</b> Consistency <b>✳</b> Code <b>✳</b> Corners <b>✳</b> Character <b>✳</b> Curiosity <b>✳</b> Consistency <b>✳</b> Code <b>✳</b> Corners <b>✳</b></span></div></div>
++    <section class="site-shell section" id="identity">
++      <div class="section-head"><div><div class="kicker">01 / The operating system</div><h2>Many lanes.<br>One direction.</h2></div><p class="section-note">Different interests, same underlying obsession: understand how things work, then make them better.</p></div>
++      <div class="grid">
++        <article class="tile"><div class="tile-num">01 — THE GARAGE</div><div class="tile-icon">↗</div><h3>Throttle therapy</h3><p>Himachal twisties, a pearl-white 250, learning every corner with respect. The road teaches patience faster than anything else.</p><div class="tile-mark">01</div></article>
++        <article class="tile"><div class="tile-num">02 — THE LAB</div><div class="tile-icon">⌘</div><h3>Open-source brain</h3><p>Android bring-up, device trees, SELinux policies, kernel rabbit holes. If it breaks, trace it. If it works, understand why.</p><div class="tile-mark">02</div></article>
++        <article class="tile"><div class="tile-num">03 — THE GYM</div><div class="tile-icon">＋</div><h3>Earn the physique</h3><p>Training isn't a shortcut or a highlight reel. It's reps, routine, patience, and building a version of yourself you respect.</p><div class="tile-mark">03</div></article>
++        <article class="tile"><div class="tile-num">04 — THE LENS</div><div class="tile-icon">◎</div><h3>Capture the ride</h3><p>Action-cam footage, natural motion, edits that feel like the moment. Make the story hit without polishing the life out of it.</p><div class="tile-mark">04</div></article>
++        <article class="tile"><div class="tile-num">05 — THE MIND</div><div class="tile-icon">∿</div><h3>Always investigating</h3><p>Chemistry, systems, details, the reason behind the result. Curiosity is the common thread running through everything.</p><div class="tile-mark">05</div></article>
++        <article class="tile"><div class="tile-num">06 — THE ORIGIN</div><div class="tile-icon">⌁</div><h3>Mountain rooted</h3><p>Himachal in the rear-view and Delhi in the story. A restless mix of roots, ambition, and wanting to see what's beyond.</p><div class="tile-mark">06</div></article>
++      </div>
++    </section>
++    <section class="site-shell section" id="manifesto">
++      <div class="manifesto"><div><div class="kicker">02 / Personal philosophy</div><h2>No final<br>version.</h2></div><div class="manifesto-copy">I don't want a life that looks impressive from a distance. I want one that feels <em>earned up close.</em><br><br><span class="dim">More skill. More miles. Better decisions. Stronger builds. A little less ego every time I learn something new.</span><br><br>Every version is a work in progress. <em>That's the point.</em></div></div>
++      <div class="specs"><div class="spec"><strong>∞</strong><span>Iterations ahead</span></div><div class="spec"><strong>250</strong><span>CC of escape</span></div><div class="spec"><strong>01</strong><span>Mindset: improve</span></div><div class="spec"><strong>0%</strong><span>Done growing</span></div></div>
++    </section>
++    <section class="site-shell section" id="projects">
++      <div class="section-head"><div><div class="kicker">03 / Selected work</div><h2>Things I've<br>put into the world.</h2></div><p class="section-note">A few repositories from the Android and open-source rabbit holes. The code is the real portfolio — feel free to dig in.</p></div>
++      <div class="project-grid">
++        <a class="project-card project-featured" href="https://github.com/th4rv4/android_device_xiaomi_duchamp" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>ANDROID / DEVICE TREE</span><span>01 ↗</span></div>
++          <h3>duchamp<br>device tree</h3>
++          <p>Device-specific Android bring-up and ROM development work for Xiaomi's duchamp platform.</p>
++          <div class="project-link">VIEW REPOSITORY <b>↗</b></div>
++        </a>
++        <a class="project-card" href="https://github.com/th4rv4/CHelper" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>TOOLS / EXPERIMENTS</span><span>02 ↗</span></div>
++          <h3>CHelper</h3>
++          <p>A project from my own developer toolbox. Source and ongoing work on GitHub.</p>
++          <div class="project-link">VIEW REPOSITORY <b>↗</b></div>
++        </a>
++        <a class="project-card" href="https://github.com/th4rv4/device_xiaomi_duchamp-miuicamera" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>ANDROID / CAMERA</span><span>03 ↗</span></div>
++          <h3>MIUI Camera</h3>
++          <p>Camera-related device configuration and integration work for duchamp.</p>
++          <div class="project-link">VIEW REPOSITORY <b>↗</b></div>
++        </a>
++        <a class="project-card" href="https://github.com/th4rv4/hardware_dolby" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>ANDROID / AUDIO</span><span>04 ↗</span></div>
++          <h3>Sony Dolby</h3>
++          <p>Android audio enhancement integration, build configuration and supporting components.</p>
++          <div class="project-link">VIEW REPOSITORY <b>↗</b></div>
++        </a>
++        <a class="project-card" href="https://github.com/th4rv4/changelog_duchamp" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>DOCUMENTATION</span><span>05 ↗</span></div>
++          <h3>duchamp<br>changelog</h3>
++          <p>A running record of device updates, fixes, changes and experiments.</p>
++          <div class="project-link">VIEW REPOSITORY <b>↗</b></div>
++        </a>
++        <a class="project-card project-github" href="https://github.com/th4rv4?tab=repositories" target="_blank" rel="noopener noreferrer">
++          <div class="project-top"><span>MORE OPEN SOURCE</span><span>06 ↗</span></div>
++          <h3>More on<br>GitHub.</h3>
++          <p>Browse all public repositories, forks and experiments.</p>
++          <div class="project-link">EXPLORE ALL REPOSITORIES <b>↗</b></div>
++        </a>
++      </div>
++    </section>
++    <section class="site-shell section" id="build">
++      <div class="section-head"><div><div class="kicker">04 / Current build log</div><h2>Under the<br>fairing.</h2></div><p class="section-note">The interesting stuff isn't always visible. Here's the kind of work happening behind the scenes.</p></div>
++      <div class="terminal" id="terminal">
++        <div class="terminal-top"><div class="terminal-dots"><i></i><i></i><i></i></div><span>atharva@localhost — build.log</span><span>UTF-8</span></div>
++        <div class="terminal-body" id="terminal-output" aria-live="polite">
++          <div><span class="prompt">atharva@dev:~$</span> whoami</div>
++          <div class="value">curious human // rider // android tinkerer</div>
++          <div><span class="prompt">atharva@dev:~$</span> cat priorities.txt</div>
++          <div class="value">learn deeply<br>build responsibly<br>ride consciously<br>stay consistent</div>
++          <div><span class="comment"># status: compiling the next version...</span></div>
++          <div><span class="prompt">atharva@dev:~$</span> <span class="cursor"></span></div>
++        </div>
++        <div class="terminal-controls"><small>Interactive shell / simulated commands</small><button id="run-command" type="button">Run next iteration ↗</button></div>
++      </div>
++    </section>
++    <section class="site-shell section contact-section" id="contact">
++      <div class="contact-panel">
++        <div><div class="kicker">05 / Find me around the internet</div><h2>Good work.<br>Good people.</h2><p>Open-source collaboration, tech conversations, ride stories — my inbox and DMs are open.</p></div>
++        <div class="contact-links">
++          <a href="https://github.com/th4rv4" target="_blank" rel="noopener noreferrer"><span>GITHUB</span><strong>@th4rv4 ↗</strong></a>
++          <a href="https://instagram.com/gxxr.bruh" target="_blank" rel="noopener noreferrer"><span>INSTAGRAM</span><strong>@gxxr.bruh ↗</strong></a>
++          <a href="mailto:atharva.agnihotri7115@gmail.com"><span>EMAIL</span><strong>Say hello ↗</strong></a>
++        </div>
++      </div>
++    </section>
++  </main>
++  <footer><div class="site-shell footer-row"><strong>ATHARVA<span style="color:var(--signal)">.</span></strong><p>DESIGNED IN PROGRESS · HIMACHAL / INDIA</p><p>© 2026 — NO FINAL BUILD</p></div></footer>
++</div>
++<script>
++const output = document.getElementById('terminal-output');
++const button = document.getElementById('run-command');
++const iterations = [
++  ['git status --short', 'M  mindset/consistency', 'M  garage/ride-skill', '?? future/possibilities'],
++  ['make menuconfig', 'CONFIG_CURIOUS=y', 'CONFIG_DISCIPLINE=y', 'CONFIG_KEEP_LEARNING=y'],
++  ['./flash-next-version.sh', '[ OK ] lessons compiled', '[ OK ] ego reduced', '[ OK ] ambition retained'],
++  ['sudo reboot', 'Rebooting into a better version...', 'Same roots. New perspective.']
++];
++let iteration = 0;
++button.addEventListener('click', () => {
++  const lines = iterations[iteration % iterations.length];
++  const block = document.createElement('div');
++  block.style.marginTop = '15px';
++  block.innerHTML = '<div><span class="prompt">atharva@dev:~$</span> ' + lines[0] + '</div>' + lines.slice(1).map(line => '<div class="value">' + line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>').join('');
++  output.insertBefore(block, output.lastElementChild);
++  iteration++;
++  button.textContent = iteration % iterations.length === 0 ? 'Run next iteration ↗' : 'Run another command ↗';
++});
++</script>
++</body>
++</html>
