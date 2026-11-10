@@ -137,11 +137,98 @@ footer { position:relative; z-index:1; border-top:1px solid var(--line); padding
 .contact-links span { color:var(--muted); font-size:9px; letter-spacing:.17em; }
 .contact-links strong { font-size:13px; letter-spacing:.03em; }
 .contact-links a:hover strong { color:var(--accent); }
-@media(max-width:800px) { .project-grid{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr;padding:35px} }
-@media(max-width:520px) { .project-grid{grid-template-columns:1fr}.project-card{min-height:230px}.contact-panel{padding:25px} }
-
-@media(max-width:800px) { .site-shell{padding-left:22px;padding-right:22px}.hero{grid-template-columns:1fr;min-height:0;padding-top:65px}.hero-art{min-height:420px}.machine-card{width:min(88%,420px)}.orbit{width:min(78vw,420px)}.grid{grid-template-columns:1fr 1fr}.manifesto{grid-template-columns:1fr;gap:28px}.section{padding:75px 0}.specs{grid-template-columns:1fr 1fr}.spec:nth-child(2){border-right:0}.spec:nth-child(-n+2){border-bottom:1px solid var(--line)}.nav-links{gap:14px}.nav-links a{font-size:9px} }
-@media(max-width:520px) { .nav{height:65px}.nav-links{display:none}.nav-status{font-size:9px}.hero{padding-bottom:50px}h1{font-size:clamp(76px,20vw,110px)}.hero-art{min-height:350px}.machine-card{width:92%}.grid{grid-template-columns:1fr}.tile{min-height:220px}.section-head{display:block}.section-note{margin-top:18px}.spec{padding:17px}.spec strong{font-size:29px}.terminal-body{font-size:10px;padding:17px}.footer-row{align-items:flex-start;flex-direction:column;gap:8px} }
+/* Tablet and mobile layouts */
+.nav-right { display:flex; align-items:center; gap:18px; }
+.menu-toggle { display:none; width:44px; height:44px; padding:11px; border:1px solid var(--line); background:transparent; color:var(--site-on-background); border-radius:4px; cursor:pointer; }
+.menu-toggle span { display:block; width:19px; height:1px; margin:5px auto; background:currentColor; transition:transform .2s ease; }
+.nav-links a:focus-visible, .btn:focus-visible, .project-card:focus-visible, .contact-links a:focus-visible, button:focus-visible { outline:2px solid var(--signal); outline-offset:4px; }
+@media (max-width: 900px) {
+  .site-shell { padding-left:24px; padding-right:24px; }
+  .hero { grid-template-columns:1fr; min-height:0; padding-top:62px; padding-bottom:56px; }
+  .hero-copy { max-width:620px; }
+  .hero-art { min-height:420px; }
+  .machine-card { width:min(82%,420px); }
+  .orbit { width:min(72vw,420px); }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .manifesto { grid-template-columns:1fr; gap:28px; }
+  .section { padding:78px 0; }
+  .specs { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .spec:nth-child(2) { border-right:0; }
+  .spec:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+  .project-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .contact-panel { grid-template-columns:1fr; gap:28px; padding:36px; }
+}
+@media (max-width: 640px) {
+  .site-shell { padding-left:19px; padding-right:19px; }
+  .nav { height:66px; }
+  .brand { font-size:11px; gap:9px; }
+  .brand-mark { width:27px; height:27px; }
+  .nav-right { gap:10px; }
+  .nav-status { font-size:8px; letter-spacing:.1em; gap:6px; }
+  .dot { width:6px; height:6px; }
+  .menu-toggle { display:block; flex:0 0 44px; }
+  .nav-links { display:none; position:absolute; top:65px; left:0; right:0; z-index:5; padding:10px 19px 18px; background:#151a1b; border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch; gap:0; }
+  .nav-links.is-open { display:flex; }
+  .nav-links a { display:block; padding:15px 4px; font-size:10px; border-top:1px solid var(--line); }
+  .hero { padding-top:48px; padding-bottom:42px; gap:10px; }
+  .eyebrow { font-size:9px; letter-spacing:.17em; }
+  h1 { font-size:clamp(64px,18vw,104px); line-height:.84; margin:22px 0 20px; overflow-wrap:anywhere; }
+  .hero-copy { font-size:13px; line-height:1.75; }
+  .hero-actions { gap:9px; margin-top:24px; }
+  .btn { min-height:46px; padding:13px 14px; font-size:9px; letter-spacing:.1em; }
+  .hero-art { min-height:clamp(285px,88vw,370px); margin:2px -4px 0; }
+  .machine-card { width:min(94%,390px); aspect-ratio:1 / 1.02; }
+  .machine-label { top:16px; left:16px; font-size:8px; }
+  .machine-number { top:12px; right:16px; font-size:34px; }
+  .machine-bottom { left:16px; right:16px; bottom:15px; gap:10px; }
+  .machine-bottom strong { font-size:clamp(20px,6vw,27px); }
+  .machine-bottom small { font-size:8px; }
+  .side-stamp { right:0; bottom:8px; font-size:7px; }
+  .ticker-track { padding:14px 0; gap:22px; font-size:11px; }
+  .ticker-track span { gap:22px; }
+  .section { padding:62px 0; }
+  .section-head { display:block; margin-bottom:25px; }
+  h2 { font-size:clamp(39px,11vw,58px); }
+  .section-note { margin-top:15px; font-size:12px; }
+  .grid, .project-grid { grid-template-columns:minmax(0,1fr); gap:11px; }
+  .tile { min-height:0; padding:21px; }
+  .tile-icon { margin:22px 0 14px; }
+  .tile h3 { font-size:25px; }
+  .tile p { font-size:12px; }
+  .tile-mark { font-size:100px; }
+  .manifesto { padding:48px 0; gap:22px; }
+  .manifesto h2 { font-size:clamp(43px,12vw,62px); }
+  .manifesto-copy { font-size:19px; line-height:1.5; }
+  .specs { margin-top:22px; }
+  .spec { padding:16px 13px; }
+  .spec strong { font-size:28px; }
+  .spec span { font-size:8px; letter-spacing:.1em; }
+  .project-card { min-height:220px; padding:21px; }
+  .project-card h3 { margin-top:28px; font-size:clamp(30px,9vw,39px); }
+  .project-card p { font-size:12px; }
+  .terminal-top { padding:0 12px; font-size:8px; letter-spacing:.08em; }
+  .terminal-body { padding:17px 14px; font-size:10px; overflow-wrap:anywhere; }
+  .terminal-controls { align-items:stretch; flex-direction:column; padding:0 14px 16px; }
+  .terminal-controls small { line-height:1.5; }
+  #run-command { min-height:43px; width:100%; font-size:9px; }
+  .contact-panel { padding:24px 20px; gap:20px; }
+  .contact-panel p { font-size:12px; }
+  .contact-links a { min-height:58px; padding:16px 0; }
+  .contact-links span { font-size:8px; }
+  .contact-links strong { font-size:12px; }
+  footer { padding:23px 0 30px; }
+  .footer-row { align-items:flex-start; flex-direction:column; gap:7px; }
+  .footer-row p { margin:4px 0; font-size:9px; }
+}
+@media (max-width: 360px) {
+  .site-shell { padding-left:15px; padding-right:15px; }
+  .nav-status { display:none; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
+  .hero-actions .btn { width:100%; }
+  .machine-bottom { align-items:flex-start; flex-direction:column; }
+  .machine-bottom > small { align-self:flex-end; }
+  .contact-panel { padding:20px 16px; }
+}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -151,8 +238,8 @@ footer { position:relative; z-index:1; border-top:1px solid var(--line); padding
   <header>
     <div class="site-shell nav">
       <a class="brand" href="#top" aria-label="Atharva home"><span class="brand-mark">A.</span><span>ATHARVA / 001</span></a>
-      <nav class="nav-links" aria-label="Main navigation"><a href="#identity">Identity</a><a href="#projects">Projects</a><a href="#build">Build log</a><a href="#contact">Contact</a></nav>
-      <div class="nav-status"><span class="dot"></span> IN PROGRESS · ALWAYS</div>
+      <nav class="nav-links" id="site-navigation" aria-label="Main navigation"><a href="#identity">Identity</a><a href="#projects">Projects</a><a href="#build">Build log</a><a href="#contact">Contact</a></nav>
+      <div class="nav-right"><div class="nav-status"><span class="dot"></span> IN PROGRESS · ALWAYS</div><button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation"><span></span><span></span></button></div>
     </div>
   </header>
   <main id="top">
@@ -277,6 +364,22 @@ footer { position:relative; z-index:1; border-top:1px solid var(--line); padding
   <footer><div class="site-shell footer-row"><strong>ATHARVA<span style="color:var(--signal)">.</span></strong><p>DESIGNED IN PROGRESS · HIMACHAL / INDIA</p><p>© 2026 — NO FINAL BUILD</p></div></footer>
 </div>
 <script>
+const menuToggle = document.querySelector('.menu-toggle');
+const siteNavigation = document.getElementById('site-navigation');
+menuToggle.addEventListener('click', () => {
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+  siteNavigation.classList.toggle('is-open', !isOpen);
+});
+siteNavigation.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    siteNavigation.classList.remove('is-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open navigation');
+  });
+});
+
 const output = document.getElementById('terminal-output');
 const button = document.getElementById('run-command');
 const iterations = [
