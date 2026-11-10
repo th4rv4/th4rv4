@@ -1,24 +1,33 @@
 <h1 align="center">Hey, I'm Atharva! 👋</h1>
 
 <p align="center">
-  🧠 20 y/o tech enthusiast & Android developer from Delhi, India 🇮🇳 <br>
-  📱 Unofficial AOSP Maintainer | Passionate about open-source | Chasing <a href="https://www.instagram.com/davidlaid/">David Laid's</a> physique.
+  🧠 21 y/o tech enthusiast & Android developer from Delhi, India 🇮🇳 <br>
+  📱 Unofficial AOSP Maintainer | Building the tools I wish existed | 🏍️ Riding a Gixxer SF 250 <br>
+  Chasing <a href="https://www.instagram.com/davidlaid/">David Laid's</a> physique.
 </p>
 
 ---
 
-## 🔧 Projects I've Worked On
+## 🛠️ Things I've Built
 
-I've worked on a variety of devices and projects in the custom ROM scene:
+| Project | What it does |
+|---|---|
+| 💻 **[C-Helper](https://github.com/th4rv4/CHelper)** · [website](https://th4rv4.github.io/CHelper/) | A lightweight, G-Helper-style replacement for the bloated Control Center on the Colorful EVOL P15: power & GPU modes, fan curves, keyboard lighting, battery charge limit and Fn keys in one small tray app. Built it because the stock app reset my screen to 40 Hz every time I switched to Power Saving. |
+| 🏍️ **[Zuki Nav](https://github.com/th4rv4/Zuki_Nav)** | Google Maps turn-by-turn on Suzuki Ride Connect dashboards (India), instead of the stock maps. Plus fuel range, mileage and trip tracking. |
 
-- **Realme XT** – Official Maintainer @ConquerOS  
+---
+
+## 📱 Custom ROM Scene
+
+I've worked on a variety of devices in the custom ROM scene:
+
+- **Realme XT** – Official Maintainer @ConquerOS
 - **Realme Nemo (RM6785)** – Official Maintainer @Spark-Rom
 - **Realme X**, **Redmi Note 10 Pro**, **Poco F1**
 
 ## 🚧 Current Work
 
-Currently experimenting with:
-- **Poco X6 Pro (Duchamp)** — breaking and fixing stuff — the usual dev routine.
+- **Poco X6 Pro (Duchamp)** — breaking and fixing stuff, the usual dev routine. Currently revamping the **XiaomiParts** and **Dolby** settings UIs for Android 17.
 
 🔗 [Duchamp Device Tree](https://github.com/Atharva-Agnihotri7115/android_device_xiaomi_duchamp)
 
@@ -27,17 +36,20 @@ Currently experimenting with:
 ## 🧰 Tech Stack & Skills
 
 - 🛠️ Android (ROM Development, Device Trees, Init, SELinux)
+- 📲 Android apps
+- 🪟 Windows desktop apps (C# / .NET), talking to laptop firmware
 - 🐧 Linux & Gnome (daily drivers)
-- 🔀 Git & GitHub workflows
+- 🔀 Git, GitHub workflows & GitHub Actions CI / releases
 
 ---
 
 ## 💬 Hobbies & Interests
 
 Outside tech, I vibe with:
-- ⚽ Football  
-- 🏋️‍♂️ Gym 
-- 🎧 Music  
+- 🏍️ Riding
+- ⚽ Football
+- 🏋️‍♂️ Gym
+- 🎧 Music
 - 🤸‍♂️ Martial arts & tricking
 - 🏕️ Trekking & Going on Hikes
 
@@ -46,11 +58,10 @@ Outside tech, I vibe with:
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=th4rv4&show_icons=true&theme=tokyonight" height="180"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=th4rv4&layout=compact&theme=tokyonight" height="180"/>
+  <img src="[github-stats-extended.vercel.app](https://github-stats-extended.vercel.app)/api?username=th4rv4&show_icons=true&theme=tokyonight" height="180"/>
 </p>
 
-### 🔥 Streak Heatmap
+### Streak Heatmap
 
 <p align="center">
   <img src="https://streak-stats.demolab.com?user=th4rv4&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
@@ -58,18 +69,16 @@ Outside tech, I vibe with:
 
 ---
 
-## 🏆 Contribution Highlights
-
+### GitHub Summary
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=th4rv4&theme=tokyonight&column=4&margin-w=15&margin-h=15" />
+<img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=th4rv4&theme=github_dark" height="180"/>
 </p>
 
----
+### 📬 Connect With Me
 
-## 📬 Connect With Me
-
-- 📧 [atharva.agnihotri7115@gmail.com](mailto:atharva.agnihotri7115@gmail.com)  
+- 📧 [atharva.agnihotri7115@gmail.com](mailto:atharva.agnihotri7115@gmail.com)
 - 💬 [Telegram](https://t.me/zyzzbrahhhh)
+- ☕ Like my work? Support me over UPI: `atharvaagnihotri@upi`
 
 ---
 
